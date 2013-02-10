@@ -1,0 +1,68 @@
+JSON-RPC request
+
+{
+  "jsonrpc": "2.0"  ,       // some json rpc version no
+  "method": "<METHOD>",
+  "params": <PARAM_OBJECT>, // optional
+  "id": 1                   // not properly inspected yet
+}
+
+JSON-RPC response
+
+{
+  "id": 1,                  // probably request id
+  "jsonrpc": 2.0",          // some json rpc version no
+  "result": <RESULT_OBJECT> // result of request
+}
+
+METHOD
+======
+
+Name: Player.GetActivePlayers
+Params: -
+Result: [ {playerid: $id, type: $type}, {playerid: ...}, ... ]
+
+######
+
+Name: Player.Open
+Params: { item => { "file" => $path } }       // params not complete
+Result:
+
+$path might be something like this:
+  plugins://<plugin-name>/<some params>
+
+######
+
+Name: Player.Seek
+Params: {"playerid": $pid, "value": $val}
+Result: {
+  "percentage": $p,
+  "time": {
+       "hours": $h,
+       "minutes": $m,
+       "seconds": $s,
+       "milliseconds": $ms
+  },
+  "totaltime": {
+       "hours": $h,
+       "minutes": $m,
+       "seconds": $s,
+       "milliseconds": $ms
+  }
+}
+
+$val:
+  string:
+    - smallforward
+    - smallbackward
+    - bigforward
+    - bigbackward
+  number (0-100):
+    -percentage
+  object:
+    {
+      "hours": $h,
+      "minutes": $m,
+      "seconds": $s,
+      "milliseconds": $ms
+    }  
